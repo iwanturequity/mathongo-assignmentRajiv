@@ -27,15 +27,13 @@ export default function ChapterGrid({ chapters }: ChapterGridProps) {
         </div>
       ) : (
         chapters.map((chapter) => {
-          // Calculate total questions
           const totalQuestions = Object.values(chapter.yearWiseQuestionCount).reduce((sum, count) => sum + count, 0);
           const solvedPercentage = Math.round((chapter.questionSolved / totalQuestions) * 100);
-          
-          // Question trend (2024 to 2025)
+
           const questionCount2024 = chapter.yearWiseQuestionCount[2024] || 0;
           const questionCount2025 = chapter.yearWiseQuestionCount[2025] || 0;
           const trendIncreasing = questionCount2025 > questionCount2024;
-          
+
           return (
             <Card 
               key={chapter.chapter} 
@@ -62,8 +60,7 @@ export default function ChapterGrid({ chapters }: ChapterGridProps) {
                 <div className="flex items-center text-xs text-muted-foreground">
                   <span className="truncate">{chapter.unit} • {chapter.class}</span>
                 </div>
-                
-                {/* Status badge */}
+
                 <Badge 
                   className={cn(
                     "absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200",
@@ -75,7 +72,7 @@ export default function ChapterGrid({ chapters }: ChapterGridProps) {
                   {chapter.status}
                 </Badge>
               </CardHeader>
-              
+
               <CardContent className="p-4 pt-0 space-y-4">
                 <div className="grid grid-cols-2 gap-2">
                   <div className="bg-card/30 rounded-lg p-2 text-center">
@@ -94,7 +91,7 @@ export default function ChapterGrid({ chapters }: ChapterGridProps) {
                     <div className="font-medium">{questionCount2024} Qs</div>
                   </div>
                 </div>
-                
+
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs mb-1">
                     <span>Progress</span>
@@ -102,16 +99,16 @@ export default function ChapterGrid({ chapters }: ChapterGridProps) {
                   </div>
                   <Progress 
                     value={solvedPercentage} 
-                    className="h-2"
-                    indicatorClassName={cn(
-                      solvedPercentage < 30 && "bg-red-500",
-                      solvedPercentage >= 30 && solvedPercentage < 70 && "bg-amber-500",
-                      solvedPercentage >= 70 && "bg-green-500"
+                    className={cn(
+                      "h-2",
+                      solvedPercentage < 30 && "[&>div]:bg-red-500",
+                      solvedPercentage >= 30 && solvedPercentage < 70 && "[&>div]:bg-amber-500",
+                      solvedPercentage >= 70 && "[&>div]:bg-green-500"
                     )}
                   />
                 </div>
               </CardContent>
-              
+
               <CardFooter className="p-4 pt-0">
                 <div className="w-full">
                   <div className="flex justify-between items-center">
