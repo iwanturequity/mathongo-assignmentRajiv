@@ -8,7 +8,7 @@ It allows users to filter, sort, and view subject-specific chapters with real-ti
 
 ## 🚀 Live Demo
 
-🔗 [https://mathongo-assignmentrajiv.vercel.app](https://mathongo-assignmentrajiv.vercel.app)
+🔗 [https://mathongo-assignment-rajiv-9dps.vercel.app/](https://mathongo-assignment-rajiv-9dps.vercel.app/)
 
 ---
 
