@@ -42,15 +42,13 @@ export default function ChapterList({ chapters }: ChapterListProps) {
         </TableHeader>
         <TableBody>
           {chapters.map((chapter) => {
-            // Calculate total questions
             const totalQuestions = Object.values(chapter.yearWiseQuestionCount).reduce((sum, count) => sum + count, 0);
             const solvedPercentage = Math.round((chapter.questionSolved / totalQuestions) * 100);
-            
-            // Question trend (2024 to 2025)
+
             const questionCount2024 = chapter.yearWiseQuestionCount[2024] || 0;
             const questionCount2025 = chapter.yearWiseQuestionCount[2025] || 0;
             const trendIncreasing = questionCount2025 > questionCount2024;
-            
+
             return (
               <TableRow 
                 key={chapter.chapter} 
@@ -90,11 +88,11 @@ export default function ChapterList({ chapters }: ChapterListProps) {
                   <div className="flex items-center gap-2">
                     <Progress 
                       value={solvedPercentage} 
-                      className="h-2 flex-1"
-                      indicatorClassName={cn(
-                        solvedPercentage < 30 && "bg-red-500",
-                        solvedPercentage >= 30 && solvedPercentage < 70 && "bg-amber-500",
-                        solvedPercentage >= 70 && "bg-green-500"
+                      className={cn(
+                        "h-2 flex-1",
+                        solvedPercentage < 30 && "[&>div]:bg-red-500",
+                        solvedPercentage >= 30 && solvedPercentage < 70 && "[&>div]:bg-amber-500",
+                        solvedPercentage >= 70 && "[&>div]:bg-green-500"
                       )}
                     />
                     <span className="text-xs text-muted-foreground w-16">
